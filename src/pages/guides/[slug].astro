@@ -1,13 +1,24 @@
 ---
 import Base from "../../layouts/BaseLayout.astro";
-const { slug } = Astro.params;
-const mod = await import(`../../../content/guides/${slug}.mdx`).catch(() => null);
-if (!mod) {
-  throw new Error("Guide not found");
+
+// Build static pages from MDX files in /content/guides
+export function getStaticPaths() {
+  const modules = import.meta.glob("../../../content/guides/*.mdx");
+  return Object.keys(modules).map((p) => {
+    const slug = p.split("/").pop().replace(".mdx", "");
+    return { params: { slug } };
+  });
 }
-const { frontmatter, default: Content } = mod;
+
+const { slug } = Astro.params;
+// Load the MDX at build time (note: NOT in the same folder as this file)
+const page = await import(`../../../content/guides/${slug}.mdx`).catch(() => null);
+if (!page) throw new Error("Guide not found");
+
+const { frontmatter, default: Content } = page;
 ---
-<Base title={frontmatter.title} description={frontmatter.excerpt}>
+
+<Base title={frontmatter?.title ?? "Guide"} description={frontmatter?.description ?? ""}>
   <article class="prose prose-neutral dark:prose-invert max-w-none">
     <Content />
   </article>
