@@ -3,13 +3,9 @@ layout: ../../layouts/BaseLayout.astro
 title: Sawyer Mini vs LifeStraw Peak Squeeze
 description: Two pocket filters. Which should you throw in the bag?
 ---
-title: Sawyer Mini vs LifeStraw Peak Squeeze
-description: Two pocket filters. Which should you throw in the bag?
----
 
 import ProsCons from "../../components/ProsCons.astro";
 import SpecTable from "../../components/SpecTable.astro";
-import ProductCard from "../../components/ProductCard.astro";
 
 ## Verdict
 Both work. The **LifeStraw Peak Squeeze** has better flow and fewer clogs; the **Sawyer Mini** wins on price and ubiquity.
@@ -20,9 +16,14 @@ Both work. The **LifeStraw Peak Squeeze** has better flow and fewer clogs; the *
 />
 
 ## Specs
-<SpecTable rows={[
-["Filter type","Hollow fiber (0.1μm)"],["Use","Squeeze/bottle/gravity"],["Weight","~65–100 g"],["Backflush","Yes"]
-]} />
+<SpecTable
+  rows={[
+    ["Filter type","Hollow fiber (0.1μm)"],
+    ["Use","Squeeze/bottle/gravity"],
+    ["Weight","~65–100 g"],
+    ["Backflush","Yes"]
+  ]}
+/>
 
 ## Picks
 - **Best overall**: LifeStraw Peak Squeeze — [buy](/go/lifestraw-peak/)
