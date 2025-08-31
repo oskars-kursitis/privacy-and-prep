@@ -1,0 +1,12 @@
+---
+import { getAffiliate } from '../../utils/links';
+export async function getStaticPaths() {
+  // Build static pages for all known slugs at build time
+  const slugs = Object.keys((await import('../../../affiliate/links.json')).default);
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+const { slug } = Astro.params;
+const target = getAffiliate(slug);
+const url = target ?? '/';
+Astro.redirect(url);
+---

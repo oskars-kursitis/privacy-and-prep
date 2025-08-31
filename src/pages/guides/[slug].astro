@@ -1,0 +1,14 @@
+---
+import Base from "../../layouts/BaseLayout.astro";
+const { slug } = Astro.params;
+const mod = await import(`../../../content/guides/${slug}.mdx`).catch(() => null);
+if (!mod) {
+  throw new Error("Guide not found");
+}
+const { frontmatter, default: Content } = mod;
+---
+<Base title={frontmatter.title} description={frontmatter.excerpt}>
+  <article class="prose prose-neutral dark:prose-invert max-w-none">
+    <Content />
+  </article>
+</Base>
