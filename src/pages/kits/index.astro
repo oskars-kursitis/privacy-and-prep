@@ -1,7 +1,41 @@
 ---
 import Base from "../../layouts/BaseLayout.astro";
+
+// Auto-load all MDX files in this folder
+const modules = import.meta.glob("./*.mdx", { eager: true });
+
+const entries = Object.entries(modules)
+  .map(([path, mod]) => {
+    const slug = path.replace("./", "").replace(".mdx", "");
+    // @ts-ignore
+    const fm = (mod as any).frontmatter ?? {};
+    return {
+      slug,
+      title: fm.title ?? slug.replace(/-/g, " "),
+      description: fm.description ?? "",
+    };
+  })
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
-<Base title="Kits">
+
+<Base title="Kits" description="Pre-built gear setups you can deploy today.">
   <h1 class="text-2xl font-bold mb-4">Kits</h1>
-  <p class="text-gray-600 dark:text-gray-400">Content coming soon.</p>
+
+  {entries.length === 0 ? (
+    <p>Content coming soon.</p>
+  ) : (
+    <div class="grid gap-4 md:grid-cols-2">
+      {entries.map((kit) => (
+        <a href={`/kits/${kit.slug}/`} class="no-underline">
+          <div class="border rounded-xl p-4 hover:shadow-sm transition">
+            <div class="font-semibold">{kit.title}</div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              {kit.description}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
 </Base>
+
