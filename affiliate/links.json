@@ -1,5 +1,11 @@
 {
   "faraday-bag": "https://example.com/placeholder/faraday-bag",
   "water-filter": "https://example.com/placeholder/water-filter",
-  "vpn-xyz": "https://example.com/placeholder/vpn-xyz"
+  "vpn-xyz": "https://example.com/placeholder/vpn-xyz",
+  "baofeng": "...",
+  "walkie-set": "...",
+  "power-bank": "...",
+  "solar-panel": "...",
+  "lifestraw-peak": "...",
+  "sawyer-mini": "..."
 }
